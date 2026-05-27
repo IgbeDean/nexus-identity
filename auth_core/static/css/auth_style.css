@@ -1,0 +1,401 @@
+/* --- Nexus Identity Variables --- */
+:root {
+    --auth-bg: #000000;         /* Pure Black */
+    --card-bg: #0a0a0a;         /* Near-Black Card */
+    --nexus-red: #ff4757;       /* Signature Red */
+    --text-main: #ffffff;       /* Pure White */
+    --text-muted: #a1a1aa;      /* Slate/Zinc for labels */
+    --input-bg: #141414;        /* Dark Input Surface */
+    --border-color: #27272a;    /* Subtle Slate Border */
+    --shadow-red: rgba(255, 71, 87, 0.1);
+}
+
+/* --- Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--auth-bg);
+    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    margin-top: 1rem;
+}
+
+/* --- Layout Structure --- */
+.auth-wrapper {
+    margin-top: 2.5rem;
+    width: 100%;
+    max-width: 1050px;
+    padding: 20px;
+}
+
+.auth-split-card {
+    display: flex;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    overflow: hidden;
+    min-height: 650px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 20px var(--shadow-red);
+}
+
+/* --- Left Side: Visual Branding --- */
+.auth-visual-side {
+    flex: 1;
+    position: relative;
+    /* Ensure you have a dark atmospheric image here or the gradient will take over */
+    background: #ffffff; 
+    display: flex;
+    flex-direction: column;
+    padding: 45px;
+    color: white;
+}
+
+.auth-visual-side::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Red-to-Black gradient overlay */
+    background: linear-gradient(135deg, rgba(201, 21, 36, 0.85) 0%, rgba(0, 0, 0, 1) 70%);
+    z-index: 1;
+}
+
+.brand-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand-logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #fff;
+}
+
+.brand-logo::after {
+    content: '.';
+    color: var(--nexus-red);
+}
+
+.back-link {
+    float: right;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.back-link:hover {
+    opacity: 1;
+}
+
+.brand-tagline h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.brand-tagline p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 300px;
+}
+
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.dot.active {
+    width: 24px;
+    border-radius: 10px;
+    background-color: var(--nexus-red);
+}
+
+/* --- Right Side: Form Content --- */
+.auth-form-side {
+    flex: 1.2;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+}
+
+.form-content-inner {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-content-inner h2 {
+    color: var(--text-main);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.form-content-inner p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 35px;
+}
+
+.form-content-inner a {
+    color: var(--nexus-red);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* --- Django Form Elements --- */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--nexus-red);
+    background: #1a1a1a;
+    box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
+}
+
+/* --- Primary Button --- */
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: var(--nexus-red);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #ff5e6c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(255, 71, 87, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+    .auth-visual-side {
+        display: none;
+    }
+    .auth-wrapper {
+        max-width: 500px;
+    }
+    .auth-form-side {
+        padding: 40px;
+    }
+}
+
+/* --- Nexus Form Error Styling --- */
+
+/* Targets the list container Django creates */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 15px 0;
+}
+
+/* Targets the individual error messages */
+.errorlist li {
+    color: var(--nexus-red);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Adds a small exclamation icon before every error for extra 'sharpness' */
+.errorlist li::before {
+    content: '\f06a'; /* FontAwesome exclamation circle */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+
+/* Highlight the input border when there is an error */
+.form-group.has-error input {
+    border-color: var(--nexus-red);
+    background: rgba(255, 71, 87, 0.02);
+}
+
+
+
+/* --- Loading Spinner --- */
+.btn-primary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Keeps the spinner contained */
+}
+
+/* The actual spinning element */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    position: absolute;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* What happens when we click */
+.btn-primary.is-loading span {
+    opacity: 0; /* Smoothly hide the "Login/Register" text */
+}
+
+.btn-primary.is-loading {
+    pointer-events: none; /* Prevent multiple clicks */
+}
+
+
+
+/* Forgot password styling */
+.form-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.forgot-password-link {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-password-link:hover {
+    color: var(--nexus-red);
+}
+
+/* Target the list and the spans Django creates for help text */
+.auth-form ul, 
+.auth-form .helptext, 
+.auth-form span[id^="id_password"] {
+    color: var(--nexus-red) !important; /* A muted grey */
+    font-size: 0.8rem !important;
+    list-style-type: none !important;
+    padding-left: 0 !important;
+    margin-top: 10px !important;
+}
+
+/* Style the individual bullet points */
+.auth-form li {
+    color: var(--nexus-red) !important;
+    margin-bottom: 5px !important;
+}
+
+
+/* Container and Divider */
+.social-auth-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.divider:not(:empty)::before { margin-right: .75em; }
+.divider:not(:empty)::after { margin-left: .75em; }
+
+/* The Google Button */
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05); /* Slight white tint */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px); /* Glass effect */
+}
+
+.btn-google:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+}

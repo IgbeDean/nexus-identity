@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Identity | Terminating Session</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --nexus-red: #ff4757;
+            --nexus-black: #0a0a0a;
+            --text-muted: #888;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--nexus-black);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .terminal-box {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        /* The Loading Bar Container */
+        .progress-container {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* The Moving Progress */
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--nexus-red);
+            box-shadow: 0 0 15px var(--nexus-red);
+            transition: width 0.05s linear;
+        }
+
+        .status-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-box">
+        <div class="brand-logo">NEXUS</div>
+        <h2 id="main-heading">System Shutdown</h2>
+        
+        <div class="progress-container">
+            <div class="progress-fill" id="bar"></div>
+        </div>
+        
+        <div class="status-text" id="status">De-authenticating...</div>
+    </div>
+
+    <script>
+        const bar = document.getElementById('bar');
+        const status = document.getElementById('status');
+        const heading = document.getElementById('main-heading');
+        let progress = 0;
+
+        const interval = setInterval(() => {
+            progress += 1;
+            bar.style.width = progress + '%';
+
+            // Phase 2: Halfway point
+            if (progress === 50) {
+                status.innerText = "See you next time";
+                status.classList.add('highlight');
+            }
+
+            // Phase 3: Completion
+            if (progress >= 100) {
+                clearInterval(interval);
+                // Create a hidden form to send a POST request to the actual logout
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{% url 'logout' %}";
+                
+                // Add the CSRF token because Django requires it for POST
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = 'csrfmiddlewaretoken';
+                csrfInput.value = '{{ csrf_token }}';
+                
+                form.appendChild(csrfInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }, 30); // 40ms * 100 = 4 seconds total duration
+    </script>
+</body>
+</html>

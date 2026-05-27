@@ -1,0 +1,46 @@
+{% extends 'home_base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        {% if user.is_authenticated %}
+            <span class="badge badge-success">System Active</span>
+            <h1>Welcome back, {{ user.profile.first_name|default:"Citizen" }}</h1>
+            <p>Your Nexus Identity is secured and active. Access your control panel to manage your profile and security settings.</p>
+            <div class="hero-actions">
+                <a href="{% url 'profile' %}" class="btn-primary">Enter Dashboard</a>
+            </div>
+        {% else %}
+            <span class="badge badge-red">Nexus Identity v1.0</span>
+            <h1>Secure Your Digital Identity</h1>
+            <p>The next generation of identity management. Build your profile, secure your credentials, and take control of your data with Nexus.</p>
+            <div class="hero-actions">
+                <a href="{% url 'register' %}" class="btn-primary">Get Started</a>
+                <a href="{% url 'login' %}" class="btn-secondary">Member Login</a>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="hero-visual">
+        <div class="abstract-shape"></div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Secure Auth</h3>
+        <p>Advanced custom user models built for the modern web.</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-user-circle"></i>
+        <h3>Smart Profiles</h3>
+        <p>Automated profile generation with optimized image handling.</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-bolt"></i>
+        <h3>Real-time Stats</h3>
+        <p>Instant feedback and account status monitoring.</p>
+    </div>
+</section>
+{% endblock %}

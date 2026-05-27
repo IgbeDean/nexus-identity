@@ -1,0 +1,60 @@
+{% extends 'profile_base.html' %}
+
+{% block content %}
+<div class="profile-page-container">
+    <header class="profile-header">
+        <h1>Account Status</h1>
+    </header>
+
+    <div class="status-grid">
+        <div class="info-card status-card">
+            <div class="status-icon info">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="status-info">
+                <h3>Member Since</h3>
+                <p>You joined Nexus Identity on <strong>{{ user.date_joined|date:"F d, Y" }}</strong>.</p>
+                <span class="badge badge-blue">Member for {{ user.date_joined|timesince }}</span>
+            </div>
+        </div>
+
+        <div class="info-card status-card">
+            <div class="status-icon security">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="status-info">
+                <h3>Identity Verification</h3>
+                {% if user.profile.email_verified %}
+                    <p>Status: <span class="badge badge-green">Verified User</span></p>
+                {% else %}
+                    <p>Status: <span class="badge badge-yellow">Unverified</span></p>
+                    <small>Please check your inbox to verify your account.</small>
+                {% endif %}
+                <small>Joined on {{ user.date_joined|date:"F d, Y" }}</small>
+            </div>
+        </div>
+
+        <div class="info-card status-card">
+            {% if user.profile.bio and user.profile.first_name %}
+                <div class="status-icon success">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <div class="status-info">
+                    <h3>Profile Integrity</h3>
+                    <p>Your profile details are complete. This helps other members recognize you.</p>
+                    <span class="badge badge-green">Profile Complete</span>
+                </div>
+            {% else %}
+                <div class="status-icon warning">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="status-info">
+                    <h3>Profile Integrity</h3>
+                    <p>Your profile is missing some details. Consider adding a bio or name.</p>
+                    <span class="badge badge-yellow">Action Required</span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

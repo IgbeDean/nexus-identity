@@ -1,0 +1,76 @@
+{% load socialaccount %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Nexus Identity{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/auth_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notifications.css' %}">
+</head>
+<body>
+
+    <main class="auth-wrapper">
+        <div class="auth-split-card">
+            
+            <!-- LEFT SIDE: Visual/Brand Identity -->
+            <div class="auth-visual-side">
+                <div class="visual-overlay"></div>
+                <div class="brand-content">
+                    <div class="brand-header">
+                        <span class="brand-logo">NEXUS</span>
+                        <a href="{% url 'home' %}" class="back-link">
+                            Back to website <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="brand-tagline">
+                        <h1>Secure. Seamless.<br>Sovereign.</h1>
+                        <p>Defining the next generation of digital identity management.</p>
+                    </div>
+
+                    <div class="visual-footer">
+                        <div class="pagination-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: The Form & Messages -->
+            <div class="auth-form-side">
+                <div class="form-content-inner">
+                    
+                    <!-- MESSAGES: Positioned inside the form side to match your home layout -->
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                                <div class="alert {{ message.tags }}">
+                                    <span class="message-text">{{ message }}</span>
+                                    <button type="button" class="close-alert" onclick="this.parentElement.classList.add('fade-out'); setTimeout(() => this.parentElement.remove(), 500);">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="{% static 'js/notifications.js' %}"></script>
+    <script src="{% static 'js/auth_logic.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Secret variables
+.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Local databases (from your earlier testing)
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nexus Identity | Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/profile_style.css' %}">
+    <!-- Font Awesome for the icons in your sidebar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Notification CSS -->
+    <link rel="stylesheet" href="{% static 'css/notifications.css' %}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <h2>Nexus</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+                        
+                        <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                            <a href="{% url 'profile' %}"><i class="fas fa-id-card"></i> About You</a>
+                        </li>
+
+                        <li class="{% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                            <a href="{% url 'edit_profile' %}"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                        </li>
+
+                        <li class="{% if request.resolver_match.url_name == 'password_change' %}active{% endif %}">
+                            <a href="{% url 'password_change' %}"><i class="fas fa-lock"></i> Change Password</a>
+                        </li>
+
+                        <li class="{% if request.resolver_match.url_name == 'account_status' %}active{% endif %}">
+                            <a href="{% url 'account_status' %}"><i class="fas fa-shield-alt"></i> Account Status</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- The Logout Footer -->
+            <div class="sidebar-footer">
+                <form action="{% url 'logout_sequence' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- This is where our messages (Success/Error) will pop up -->
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            <span class="message-text">{{ message }}</span>
+                            <button type="button" class="close-alert" onclick="this.parentElement.classList.add('fade-out'); setTimeout(() => this.parentElement.remove(), 500);">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% block content %}
+            <!-- Content from profile.html goes here -->
+            {% endblock %}
+        </main>
+    </div>
+
+
+
+
+    <!-- Keep your notification script here too -->
+    <script src="{% static 'js/notifications.js' %}"></script>
+
+     <!-- A script for authomatic logout timing -->
+    <div id="inactivity-warning" class="nexus-toast" style="display: none;">
+        <div class="toast-content">
+            <div class="toast-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="toast-body">
+                <p>Inactivity detected. Logging out in <span id="timer-seconds">10</span>s...</p>
+                <button id="stay-logged-in" class="btn-mini">Stay Connected</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Create a global settings object
+        window.NexusSettings = {
+            logoutUrl: "{% url 'logout_sequence' %}"
+        };
+    </script>
+    <!-- inactivity script -->
+    <script src="{% static 'js/inactivity.js' %}"></script>
+</body>
+</html>

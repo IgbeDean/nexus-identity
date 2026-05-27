@@ -1,0 +1,244 @@
+/* --- 1. THEME & CORE --- */
+:root {
+    --nexus-red: #ff4757;
+    --nexus-dark: #0f172a;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --bg-soft: #f8fafc;
+    --glass-border: rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    background-color: white;
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* --- 2. NAVIGATION BAR --- */
+.top-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000;
+    padding: 16px 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--nexus-dark);
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.logo span { color: var(--nexus-red); }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--nexus-red); }
+
+.nav-btn-cta {
+    background: var(--nexus-dark);
+    color: white !important;
+    padding: 7px 20px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.nav-btn-cta:hover { transform: translateY(-1px); }
+
+/* --- 3. HERO SECTION --- */
+.hero {
+    max-width: 1200px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 0 40px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+.badge-red { background: #fff1f2; color: #e11d48; }
+.badge-success { background: #f0fdf4; color: #16a34a; }
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    color: var(--nexus-dark);
+    margin-bottom: 24px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    padding: 0 40px;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn-primary {
+    background: var(--nexus-red);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    box-shadow: 0 10px 15px -3px rgba(255, 71, 87, 0.3);
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(255, 71, 87, 0.4);
+}
+
+.btn-secondary {
+    background: var(--bg-soft);
+    color: var(--nexus-dark);
+    padding: 16px 36px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid var(--glass-border);
+}
+
+/* --- 4. FEATURES SECTION --- */
+.features {
+    max-width: 1100px;
+    margin: 120px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 0 40px;
+}
+
+.feature-card {
+    padding: 40px;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    border-color: var(--nexus-red);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: var(--nexus-red);
+    margin-bottom: 24px;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* --- 5. FOOTER --- */
+.home-footer {
+    text-align: center;
+    padding: 60px 0;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Logout Form Wrapper */
+.nav-links form {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* The Logout Button itself */
+.nav-btn-logout {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 32px; /* Matches the gap of your other nav links */
+    
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Subtle hover effect */
+.nav-btn-logout:hover {
+    color: var(--nexus-red);
+    transform: translateY(-1px);
+}
+
+/* Optional: Add a tiny icon via CSS if you want it to look extra 'SaaS' */
+.nav-btn-logout::after {
+    content: "\f2f5"; /* FontAwesome Sign-out icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}

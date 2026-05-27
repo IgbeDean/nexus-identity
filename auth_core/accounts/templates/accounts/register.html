@@ -1,0 +1,25 @@
+{% extends 'auth_base.html' %}
+
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+    <div class="auth-header">
+        <h2>Join Us</h2>
+        <p>Create your account to get started</p>
+    </div>
+
+    <form method="POST" class="auth-form">
+        {% csrf_token %}
+        
+        <!-- Django renders the fields here -->
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-primary">
+            <span>Register</span>
+        </button>
+    </form>
+
+    <div style="margin-top: 1rem;" class="auth-footer">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nexus | 404 Identity Not Found</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 6rem; margin: 0; color: #3498db; }
+        h2 { font-weight: 300; letter-spacing: 2px; margin-bottom: 20px; }
+        p { opacity: 0.7; line-height: 1.6; margin-bottom: 30px; }
+        .btn-home {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        .btn-home:hover {
+            background: #ffffff;
+            color: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <i class="fas fa-ghost" style="font-size: 3rem; opacity: 0.5; margin-bottom: 20px;"></i>
+        <h1>404</h1>
+        <h2>Identity Not Found</h2>
+        <p>The coordinates you entered do not exist in the Nexus. The page may have been redacted or moved to a restricted sector.</p>
+        <a href="{% url 'home' %}" class="btn-home">Return to Core</a>
+    </div>
+</body>
+</html>
